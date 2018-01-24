@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+
+<head>
+    <title>Untitled</title>
+</head>
+
+<body>
+    <form name="f1">
+        补充文本：
+        <input type="text" name="textbox1" id="textbox1" value="" />
+    </form>
+    <h1>复制到textarea中：</h1>
+    <textarea rows="20" cols="100"></textarea>
+    <p></p>
+</body>
+<script>
+document.addEventListener('copy', function(ev) {
+    ev.preventDefault();
+    var selObj = window.getSelection();
+    var copyStr = selObj.toString();
+    var customTxt = document.querySelector('#textbox1').value;
+    setClipboardText(ev, customTxt + copyStr);
+}, false);
+
+document.addEventListener('paste', function(ev) {
+    console.log(getClipboardText(ev))
+}, false);
+
+function setClipboardText(event, value) {
+    if (event.clipboardData) {
+        return event.clipboardData.setData("text/plain", value);
+    } else if (window.clipboardData) {
+        return window.clipboardData.setData("text", value);
+    }
+}
+
+function getClipboardText(event) {
+    var clipboardData = (event.clipboardData || window.clipboardData);
+    return clipboardData.getData("text");
+}
+</script>
+
+</html>
