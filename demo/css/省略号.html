@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>省略号</title>
+	<style type="text/css">
+		p:nth-child(1) {
+			width: 100px;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+		p:nth-child(3) {
+			width: 100px;
+			word-wrap: break-word;
+			display: -webkit-box;
+			overflow: hidden;
+			text-overflow: ellipsis;
+
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 2;
+		}
+	</style>
+	<script type="text/javascript">
+		
+	</script>
+</head>
+<body>
+	<p onclick="this.style.background='blue';this.style.color='red';">12312313131231313123123123</p>
+	<br>
+	<p>12312313131231313123123123</p>
+
+</body>
+</html>

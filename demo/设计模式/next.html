@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+	function Queue() {
+		this.cb = [];
+	}
+	Queue.prototype.add = function(cb) {
+		this.cb.push(cb);
+	};
+	Queue.prototype.run = function() {
+		var cbs = this.cb;
+		for (var i = 0; i < cbs.length; i++) {
+			(function(index) {
+				var func = cbs[index];
+				cbs[index] = function(data) {
+					func.apply(this, index !== cbs.length - 1 ? [cbs[index+1], data] : [data]);
+				};
+			})(i);
+		}
+		cbs[0].call(null);
+	};
+	</script>
+</head>
+
+<body>
+</body>
+<script type="text/javascript">
+var q = new Queue();
+q.add(function(next){
+	alert(1);
+	next(3);
+});
+q.add(function(next, data) {
+	alert(data);
+	next(5);
+});
+q.add(function(data) {
+	alert(data);
+});
+q.run()
+</script>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+
+<head>
+	<meta charset="UTF-8">
+	<title>圣杯布局</title>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		/*flex布局*/
+		/*body {
+			display: flex;
+			flex-direction: column;
+			height: 100%;
+		}
+		header, footer {
+			height: 50px;
+		}
+		.HolyGrail-body {
+			flex: 1;
+			display: flex;
+		}
+		.HolyGrail-body main {
+			flex: 1;
+		}
+		.HolyGrail-body nav {
+			order: -1;
+			width: 100px;
+		}
+		.HolyGrail-body aside {
+			width: 200px;
+		}*/
+		
+		.container {
+			padding-left: 200px;
+			padding-right: 200px;
+		}
+		.main {
+			width: 100%;
+			background: red;
+			height: 300px;
+			float: left;
+		}
+		.sub {
+			float: left;
+			width: 200px;
+			height: 300px;
+			margin-left: -100%;
+			position: relative;
+			left: -200px;
+			background: #ccc;
+		}
+		.extra {
+			float: left;
+			width: 200px;
+			height: 300px;
+			margin-left: -200px;
+			position: relative;
+			right: -200px;
+			background: #999;
+		}
+	</style>
+</head>
+
+<body>
+	<!-- <header style="background: #ccc;">header</header>
+	<div class="HolyGrail-body">
+		<main class="HolyGrail-content" style="background: #aaa">main</main>
+		<nav class="HolyGrail-nav" style="background: #bbb">nav</nav>
+		<aside class="HolyGrail-ads" style="background: #ddd">aside</aside>
+	</div>
+	<footer style="background: red">footer</footer> -->
+	<div class="container">
+	    <div class="main">1</div>
+	    <div class="sub">2</div>
+	    <div class="extra">3</div>
+	</div>
+</body>
+
+</html>

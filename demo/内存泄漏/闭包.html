@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+
+<body>
+	<script type="text/javascript">
+	var theThing = null;
+	var replaceThing = function() {
+		var originalThing = theThing;
+		var unused = function() {
+			if (originalThing)
+				console.log("hi");
+		};
+		theThing = {
+			longStr: new Array(1000000).join('*'),
+			someMethod: function() {
+				console.log(someMessage);
+			}
+		};
+		originalThing = null;
+
+	};
+	setInterval(replaceThing, 1000);
+	</script>
+</body>
+
+</html>

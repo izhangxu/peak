@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>box弹性布局</title>
+	<style type="text/css">
+	* {
+		margin: 0;
+		padding: 0;
+	}
+		p {
+			background: #ccc;
+			/*width: 200px;*/
+			/*float: left;*/
+			/*margin: 5px;*/
+		}
+		#box {
+			display: box;
+			display: -webkit-box;
+			box-orient: horizontal;
+			-webkit-box-align: baseline;
+			-webkit-box-orient: horizontal;
+			-webkit-box-pack: justify;
+			/*-webkit-box-direction: reverse;*/
+		}
+		#box > p:nth-child(1) {
+			background: red;
+			width: 200px;
+			-webkit-box-flex: 1;
+		}
+		#box > p:nth-child(2) {
+			background: blue;
+			-webkit-box-flex: 2;
+			font-size: 40px;
+			margin: 0 50px;
+		}
+		#box > p:nth-child(3) {
+			background: grey;
+			-webkit-box-flex: 3;
+		}
+	</style>
+</head>
+<body>
+	<div id="box" style="width:1000px; height: 300px;">
+		<p>11111</p>
+		<p><br>2222222222</p>
+		<p>33333</p>
+	</div>
+</body>
+</html>

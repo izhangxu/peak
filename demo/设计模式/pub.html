@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+	function List() {
+		this.functions = [];
+	}
+	List.prototype.add = function(name, cb) {
+		var func = this.functions;
+		var flag = false;
+		func.forEach(function(item, index) {
+			if (item.name) {
+				flag = true;
+				item.cb.push(cb);
+			}
+		});
+		if (!flag) {
+			func.push({
+				name: name,
+				cb: [cb]
+			});
+		}
+	};
+	List.prototype.emit = function(name, data) {
+		var func = this.functions;
+		func.forEach(function(item, index) {
+			if (item.name == name) {
+				item.cb.forEach(function(cb) {
+					if (item.type == 'once') {
+						cb(data);
+						func.splice(index, 1);
+					} else {
+						cb(data);
+					}
+				})
+			}
+		});
+	}
+	List.prototype.off = function(name) {
+		var func = this.functions;
+		func.forEach(function(item, index) {
+			if (item.name == name) {
+				item.cb = [];
+				func.splice(index, 1);
+			}
+		});
+	}
+	List.prototype.once = function(name, cb) {
+		var func = this.functions;
+		func.push({
+			name: name,
+			cb: [cb],
+			type: 'once'	
+		})
+	}
+	</script>
+</head>
+
+<body>
+</body>
+<script type="text/javascript">
+var list = new List();
+list.add('a', function() {
+	alert(1);
+})
+list.add('a', function() {
+	alert(2);
+})
+list.once('b', function(data) {
+	alert(data)
+})
+list.emit('b', '1231231');
+</script>
+
+</html>

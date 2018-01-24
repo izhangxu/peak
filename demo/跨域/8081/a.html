@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style>
+
+	</style>
+	<script>
+	function get(url, func) {
+		var flag = true,
+			ifm = document.createElement('iframe'),
+			cb = function() {
+				if (flag) {
+					ifm.contentWindow.location = 'http://127.0.0.1:8081/iframe.html';
+					flag = false;
+				} else {
+					func(ifm.contentWindow.name);
+					ifm.contentWindow.close();
+					document.body.removeChild(ifm);
+					ifm.src = '';
+					ifm = null;
+				}
+			};
+			ifm.src = url;
+			ifm.style.display = 'none';
+			ifm.onload = cb
+
+			document.body.appendChild(ifm);
+	}
+	</script>
+</head>
+
+<body style="background:#fff;">
+	<input type="button" value="aaa" id="btn1">
+</body>
+<script type="text/javascript">
+	// 1.
+	// get('http://127.0.0.1:8080/a.html', function(data) {
+	// 	alert(data);
+	// })
+	
+	
+</script>
+<iframe id="ifr" src="http://127.0.0.1:8080/a.html"></iframe>
+<script type="text/javascript">
+window.onload = function() {
+    var ifr = document.getElementById('ifr');
+    var targetOrigin = 'http://127.0.0.1:8080';
+    ifr.contentWindow.postMessage('I was there!', targetOrigin);
+};
+</script>
+</html>
