@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>injectScript</title>
+	<script type="text/javascript">
+	var injectScript = function(code) {
+		var script = document.createElement('script');
+		var oHead = document.querySelector('head');
+		try {
+			script.appendChild(document.createTextNode(code));
+		} catch (e) {
+			script.text = code;
+		}
+		oHead.appendChild(script);
+	};
+	</script>
+	<script type="text/javascript">
+		injectScript('function a(){alert(1)};a()');
+	</script>
+</head>
+
+<body>
+</body>
+
+</html>

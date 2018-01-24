@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>injectStyle</title>
+	<script type="text/javascript">
+		var injectStyle = function(str){
+			var style = document.createElement('style');
+			var oHead = document.querySelector('head');
+			style.type = 'text/css';
+			try {
+				style.appendChild(document.createTextNode(str));
+			}catch(e) {
+				style.styleSheet.cssText = str;
+			}
+			oHead.appendChild(style);
+		};
+	</script>
+	<script type="text/javascript">
+		var styles = '*{margin:0; padding:0;}';
+		setTimeout(function(){
+			injectStyle(styles);
+		}, 1000);
+	</script>
+</head>
+<body>
+	<div style="background: #ccc;">123</div>
+</body>
+</html>

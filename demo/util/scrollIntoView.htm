@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+	<title>scrollIntoView</title>
+	<style type="text/css">
+		* {
+			margin:0;
+			padding: 0
+		}
+	</style>
+</head>
+<body>
+	<div style="height: 2000px; background: #ccc; ">
+		<div style="height: 1000px;">div height: 1000px</div>
+		<p>123</p>
+	</div>
+</body>
+<script type="text/javascript">
+	document.addEventListener('click', function(ev) {
+		// 要显示的标签对齐窗口顶端
+		document.querySelector('p').scrollIntoView(true);
+		// 要显示的标签对齐窗口底部
+		document.querySelector('p').scrollIntoView(false);
+		// 要显示的标签居中对齐
+		// document.querySelector('p').scrollIntoViewIfNeeded(true);
+		// 要显示的标签离浏览器窗口哪端比较近，就对齐浏览器窗口哪端
+		// document.querySelector('p').scrollIntoViewIfNeeded(false);
+	});
+</script>
+</html>
