@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>插入排序</title>
+	<script type="text/javascript">
+		var arr = [8,2,4,9,3,6,22,12,1212,0,21,6,-2,2,1];
+		var sort = function(arr){
+			var newArr = [arr[0]];
+			for (var i = 1;i<arr.length;i++) {
+				var tmp = arr[i];
+				for (var j = newArr.length - 1; j >= 0 ; j--) {
+					if(newArr[j] < tmp) {
+						newArr.push(tmp);
+						break;
+					} else {
+						if ((newArr[j] > tmp && newArr[j-1] <= tmp) || (newArr[j-1] ==undefined && newArr[j] >= tmp)) {
+							newArr.splice(j, 0, tmp);
+							break;
+						}
+					}
+				}
+			}
+			return newArr;
+		};
+		window.onload = function(){
+			document.querySelector('.input').innerHTML = '[' + arr + ']';
+			document.querySelector('.output').innerHTML = sort(arr);
+		};
+	</script>
+</head>
+<body>	
+	<h1 class="input"></h1>
+	<h1 class="output"></h1>
+	<pre>
+	对arr进行插入排序
+	1.从arr[1]开始循环，新数组result=[arr[0]];
+	for(i = 1; i < arr.length; i++)
+	2.比较arr[i]与result的每一项，如果result的最后一项比arr[i]大，则result.push(arr[i])；否则找到顺序插入arr[i]
+		for(result--) 
+			if (result[j] > arr[1]) 
+				reuslt.push(arr[1]);
+				break;
+			else
+				if(reuslt[j] > arr[i] && reuslt[j-1] <= arr[i])
+					result.splice(j, 0, arr[1])
+		
+	3.返回result;	
+	</pre>
+</body>
+</html>

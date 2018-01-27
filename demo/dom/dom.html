@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div {
+			height: 200px;
+		}
+		div::after {
+			content: '2';
+			margin-top: 200px;
+			width:20px;
+			height: 20px;
+			background: red;
+		}
+	</style>
+</head>
+<body>
+	<div style="width: 200px; border: 1px solid #ccc;"></div>
+</body>
+<script type="text/javascript">
+	var oDiv = document.querySelector('div');
+	console.log(document.defaultView.getComputedStyle(oDiv, ':after').content);
+</script>
+</html>
