@@ -1,101 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<title>排序二叉树</title>
 	<script type="text/javascript">
-		var BinaryTree = function(){
-			var Node = function(key){
-				this.key = key;
-				this.left = null;
-				this.right = null;
-			};
-
-			this.root = null;
-
-			var insertNode = function(root, newNode){
-				if (root.key > newNode.key) {
-					if(!root.left) {
-						root.left = newNode;
-					} else{
-						insertNode(root.left, newNode);
-					}
-				} else {
-					if (!root.right) {
-						root.right = newNode;
-					} else {
-						insertNode(root.right, newNode);
-					}
-				}
-			};
-
-			this.insert = function(key){
-				var node = new Node(key);
-				if (!this.root) {
-					this.root = node;
-				} else {
-					insertNode(this.root, node);
-				}
-			};
-
-			var inOrderTraverseNode = function(node, callback) {
-				if (node) {
-					inOrderTraverseNode(node.left, callback);
-					callback(node.key);
-					inOrderTraverseNode(node.right, callback);
-				}
-			};
-			// 中序遍历-所有节点升序排序输出-先访问左子树，再访问当前结点，再访问右子树
-			this.inOrderTraverse = function(callback){
-				inOrderTraverseNode(this.root, callback);
-			};
-
-			var preOrderTraverseNode = function(node, callback){
-				if (node) {
-					callback(node.key);
-					preOrderTraverseNode(node.left, callback);
-					preOrderTraverseNode(node.right, callback);
-				}
-			};
-			// 前序遍历-先输出节点，再输出左节点，再输出有节点
-			this.preOrderTraverse = function(callback) {
-				preOrderTraverseNode(this.root, callback);
-			};
-
-			var postOrderTraverseNode = function(node, callback) {
-				if(node) {
-					postOrderTraverseNode(node.left, callback);
-					postOrderTraverseNode(node.right, callback);
-					callback(node.key);
-				}
-			};
-			// 后序遍历 - 先输出左子树，再输出右子树，再输出节点
-			this.postOrderTraverse = function(callback) {
-				postOrderTraverseNode(this.root, callback);
-			};
+	var BinaryTree = function() {
+		var Node = function(key) {
+			this.key = key;
+			this.left = null;
+			this.right = null;
 		};
 
-		var nodes = [8, 3, 10, 1, 6, 14, 4, 7, 13];
-		var binaryTree = new BinaryTree();
-		nodes.forEach(function(key) {
-			binaryTree.insert(key);
-		});
-		console.log(binaryTree.root);
+		this.root = null;
 
-		// binaryTree.inOrderTraverse(function(key) {
-		// 	console.log(key);
-		// });
+		var insertNode = function(root, newNode) {
+			if (root.key > newNode.key) {
+				if (!root.left) {
+					root.left = newNode;
+				} else {
+					insertNode(root.left, newNode);
+				}
+			} else {
+				if (!root.right) {
+					root.right = newNode;
+				} else {
+					insertNode(root.right, newNode);
+				}
+			}
+		};
 
-		// binaryTree.preOrderTraverse(function(key) {
-		// 	console.log(key);
-		// });
+		this.insert = function(key) {
+			var node = new Node(key);
+			if (!this.root) {
+				this.root = node;
+			} else {
+				insertNode(this.root, node);
+			}
+		};
 
-		binaryTree.postOrderTraverse(function(key) {
-			console.log(key);
-		});
+		var inOrderTraverseNode = function(node, callback) {
+			if (node) {
+				inOrderTraverseNode(node.left, callback);
+				callback(node.key);
+				inOrderTraverseNode(node.right, callback);
+			}
+		};
+		// 中序遍历-所有节点升序排序输出-先访问左子树，再访问当前结点，再访问右子树
+		this.inOrderTraverse = function(callback) {
+			inOrderTraverseNode(this.root, callback);
+		};
+
+		var preOrderTraverseNode = function(node, callback) {
+			if (node) {
+				callback(node.key);
+				preOrderTraverseNode(node.left, callback);
+				preOrderTraverseNode(node.right, callback);
+			}
+		};
+		// 前序遍历-先输出节点，再输出左节点，再输出有节点
+		this.preOrderTraverse = function(callback) {
+			preOrderTraverseNode(this.root, callback);
+		};
+
+		var postOrderTraverseNode = function(node, callback) {
+			if (node) {
+				postOrderTraverseNode(node.left, callback);
+				postOrderTraverseNode(node.right, callback);
+				callback(node.key);
+			}
+		};
+		// 后序遍历 - 先输出左子树，再输出右子树，再输出节点
+		this.postOrderTraverse = function(callback) {
+			postOrderTraverseNode(this.root, callback);
+		};
+
+		var minNode = function(node) {
+			if (node) {
+				while (node.left) {
+					node = node.left;
+				}
+				return node.key;
+			}
+			return null;
+		}
+		// 查找最小值
+		this.min = function() {
+			return minNode(this.root);
+		}
+
+		var maxNode = function(node) {
+			if (node) {
+				while (node.right) {
+					node = node.right
+				}
+				return node.key;
+			}
+			return null;
+		}
+		// 查找最大值
+		this.max = function() {
+			return maxNode(this.root);
+		}
+
+		var searchNode = function(node, key) {
+			if (node) {
+				if (node.key > key) {
+					return searchNode(node.left, key);
+				} else if (node.key < key) {
+					return searchNode(node.right, key);
+				} else {
+					return true;
+				}
+			}
+			return false;
+		};
+		// 查询子节点
+		this.search = function(key) {
+			return searchNode(this.root, key);
+		}
+
+		var findMinNode = function(node) {
+			if (node) {
+				while(node.left) {
+					node = node.left;
+				}
+				return node;
+			}
+			return null;
+		}
+
+		var removeNode = function(node, key) {
+			if (node) {
+				if (node.key > key) {
+					node.left = removeNode(node.left, key);
+					return node;
+				} else if (node.key < key){
+					node.right = removeNode(node.right, key);
+					return node;
+				} else {
+					// 没有页节点直接删除
+					if(!node.left && !node.right) {
+						node = null;
+						return node;
+					}
+					// 只有右节点
+					if (!node.left) {
+						node = node.right;
+						return node;
+					} else if(!node.right) {
+						// 只有左节点
+						node = node.left;
+						return node;
+					}
+					// 左右节点都存在。
+					var aux = findMinNode(node.right);
+					node.key = aux.key;
+					node.right = removeNode(node.right, aux.key);
+					return node;
+				}
+			}
+			return null;
+		};
+		// 删除子节点
+		this.remove = function(key) {
+			this.root = removeNode(this.root, key);
+		}
+	};
+
+	var nodes = [8, 3, 10, 1, 6, 14, 4, 7, 13];
+	var binaryTree = new BinaryTree();
+	nodes.forEach(function(key) {
+		binaryTree.insert(key);
+	});
+	console.log(binaryTree.root);
+	console.log(binaryTree.min())
+	console.log(binaryTree.max())
+	console.log(binaryTree.search(9))
+	console.log(binaryTree.remove(3))
+	// binaryTree.inOrderTraverse(function(key) {
+	// 	console.log(key);
+	// });
+
+	// binaryTree.preOrderTraverse(function(key) {
+	// 	console.log(key);
+	// });
+
+	// binaryTree.postOrderTraverse(function(key) {
+	// 	console.log(key);
+	// });
 	</script>
 </head>
+
 <body>
-	
 </body>
+
 </html>
